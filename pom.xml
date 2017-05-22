@@ -901,6 +901,18 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>artifactory.found.no-releases</name>
+            <url>https://artifactory.found.no/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>artifactory.found.no-snapshots</name>
+            <url>https://artifactory.found.no/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
     <repositories>
         <repository>
             <id>sonatype-snapshots</id>
