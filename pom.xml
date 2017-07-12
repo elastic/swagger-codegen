@@ -846,8 +846,9 @@
     <modules>
         <module>modules/swagger-codegen</module>
         <module>modules/swagger-codegen-cli</module>
-        <module>modules/swagger-codegen-maven-plugin</module>
-        <module>modules/swagger-generator</module>
+        <!-- Commenting out modules that we don't currently need built -->
+        <!-- <module>modules/swagger-codegen-maven-plugin</module> -->
+        <!-- <module>modules/swagger-generator</module> -->
     </modules>
     <reporting>
         <outputDirectory>target/site</outputDirectory>
