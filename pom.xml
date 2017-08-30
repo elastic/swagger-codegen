@@ -9,7 +9,7 @@
     <artifactId>swagger-codegen-project</artifactId>
     <packaging>pom</packaging>
     <name>swagger-codegen-project</name>
-    <version>2.2.3-elastic-cloud</version>
+    <version>2.2.4-elastic-cloud</version>
     <url>https://github.com/elastic/swagger-codegen</url>
     <scm>
         <connection>scm:git:git@github.com:elastic/swagger-codegen.git</connection>
