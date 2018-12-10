@@ -13,4 +13,6 @@ The Cloud team relies on the Scala and Java clients, generated from our [OpenAPI
     - [swagger-codegen-cli pom.xml](https://github.com/elastic/swagger-codegen/blob/master/modules/swagger-codegen-cli/pom.xml)
     - [swagger-codegen-maven-plugin pom.xml](https://github.com/elastic/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/pom.xml)
     - [swagger-generator pom.xml](https://github.com/elastic/swagger-codegen/blob/master/modules/swagger-generator/pom.xml)
-  - Run [this Jenkins job](https://ci-staging.found.no/job/cloud-swagger-codegen-fork/) to publish the Maven artifacts
+  - Run [this Jenkins job](https://ci-staging.found.no/job/cloud-swagger-codegen-fork/) to publish the Maven artifacts:
+    - First, run the `clean package` goal (`master` branch by default)
+    - Then, run the `deploy` goal  (`master` branch by default)
