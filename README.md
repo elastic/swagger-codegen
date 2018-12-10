@@ -7,5 +7,10 @@ The Cloud team relies on the Scala and Java clients, generated from our [OpenAPI
 ### Publishing a new version to our artifactory
 
   - First, join the `#cloud-api` channel on Slack and give the Cloud API team a heads up :smile:
-  - Open a PR bumping the version in the [pom.xml](https://github.com/elastic/swagger-codegen/blob/master/pom.xml)
+  - Open a PR bumping the version in:
+    - [parent pom.xml](https://github.com/elastic/swagger-codegen/blob/master/pom.xml)
+    - [swagger-codegen pom.xml](https://github.com/elastic/swagger-codegen/blob/master/modules/swagger-codegen/pom.xml)
+    - [swagger-codegen-cli pom.xml](https://github.com/elastic/swagger-codegen/blob/master/modules/swagger-codegen-cli/pom.xml)
+    - [swagger-codegen-maven-plugin pom.xml](https://github.com/elastic/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/pom.xml)
+    - [swagger-generator pom.xml](https://github.com/elastic/swagger-codegen/blob/master/modules/swagger-generator/pom.xml)
   - Run [this Jenkins job](https://ci-staging.found.no/job/cloud-swagger-codegen-fork/) to publish the Maven artifacts
