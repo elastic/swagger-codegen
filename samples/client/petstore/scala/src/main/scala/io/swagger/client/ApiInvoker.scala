@@ -36,12 +36,47 @@ import com.fasterxml.jackson.core.JsonGenerator.Feature
 import com.fasterxml.jackson.databind._
 import com.fasterxml.jackson.annotation._
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.databind.ser.std.StdSerializer
+import com.fasterxml.jackson.databind.ser.BeanSerializerModifier
+import com.fasterxml.jackson.databind.module.SimpleModule
+import com.fasterxml.jackson.core.JsonGenerator
+
+
+private class CustomSomeSerializer extends StdSerializer[Some[_]](classOf[Some[_]]) {
+  override def serialize(
+    value: Some[_],
+    gen: JsonGenerator,
+    provider: SerializerProvider
+  ): Unit = {
+    value match {
+      case Some(x) if x == null => provider.defaultSerializeNull(gen)
+      case Some(x) => provider.defaultSerializeValue(x, gen)
+    }
+  }
+}
+
+
+private class CustomModifier extends BeanSerializerModifier {
+  override def modifySerializer(
+    config: SerializationConfig,
+    beanDesc: BeanDescription,
+    serializer: JsonSerializer[_]
+  ): JsonSerializer[_] = {
+    beanDesc.getBeanClass match {
+      case c if c == classOf[Some[_]] => new CustomSomeSerializer
+      case _ => serializer
+    }
+  }
+}
 
 object ScalaJsonUtil {
   def getJsonMapper = {
     val mapper = new ObjectMapper()
+    val customModule = new SimpleModule("custom module")
+    customModule.setSerializerModifier(new CustomModifier)
     mapper.registerModule(new DefaultScalaModule())
     mapper.registerModule(new JodaModule());
+    mapper.registerModule(customModule)
     mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT)
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
@@ -62,6 +97,9 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
 
   def escape(value: String): String = {
     URLEncoder.encode(value, "utf-8").replaceAll("\\+", "%20")
+  }
+  def escape(values: List[String]): String = {
+     values.map(escape).mkString(",")
   }
 
   def escape(value: Long): String = value.toString
@@ -151,7 +189,13 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
         else builder.`type`(contentType).put(classOf[ClientResponse], serialize(body))
       }
       case "DELETE" => {
-        builder.delete(classOf[ClientResponse])
+        if(body == null) builder.delete(classOf[ClientResponse])
+        else builder.`type`(contentType).delete(classOf[ClientResponse], serialize(body))
+      }
+      case "PATCH" => {
+        if(formData != null) builder.header("X-HTTP-Method-Override", "PATCH").post(classOf[ClientResponse], formData)
+        else if(body == null) builder.header("X-HTTP-Method-Override", "PATCH").post(classOf[ClientResponse], null)
+        else builder.header("X-HTTP-Method-Override", "PATCH").`type`(contentType).post(classOf[ClientResponse], serialize(body))
       }
       case _ => null
     }
