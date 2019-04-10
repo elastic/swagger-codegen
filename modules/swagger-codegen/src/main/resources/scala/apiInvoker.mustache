@@ -178,7 +178,8 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
         else builder.`type`(contentType).put(classOf[ClientResponse], serialize(body))
       }
       case "DELETE" => {
-        builder.delete(classOf[ClientResponse])
+        if(body == null) builder.delete(classOf[ClientResponse])
+        else builder.`type`(contentType).delete(classOf[ClientResponse], serialize(body))
       }
       case "PATCH" => {
         if(formData != null) builder.header("X-HTTP-Method-Override", "PATCH").post(classOf[ClientResponse], formData)
