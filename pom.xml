@@ -905,13 +905,13 @@
     <distributionManagement>
         <repository>
             <id>central</id>
-            <name>artifactory.elstc.co-releases</name>
-            <url>https://artifactory.elstc.co/artifactory/libs-release-local</url>
+            <name>artifactory.elstc.co-cloud-releases</name>
+            <url>https://artifactory.elstc.co/artifactory/cloud-release-local</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
-            <name>artifactory.elstc.co-snapshots</name>
-            <url>https://artifactory.elstc.co/artifactory/libs-snapshot-local</url>
+            <name>artifactory.elstc.co-cloud-snapshots</name>
+            <url>https://artifactory.elstc.co/artifactory/cloud-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
     <repositories>
