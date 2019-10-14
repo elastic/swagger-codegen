@@ -239,8 +239,8 @@ public class ScalaGatlingCodegen extends AbstractScalaCodegen implements Codegen
                         if (model instanceof RefModel) {
                             String[] refArray = model.getReference().split("\\/");
                             operation.setVendorExtension("x-gatling-body-object", refArray[refArray.length - 1] + ".toStringBody");
-                            Set<String> bodyFeederParams = new HashSet<>();
-                            Set<String> sessionBodyVars = new HashSet<>();
+                            Set<String> bodyFeederParams = new LinkedHashSet<>();
+                            Set<String> sessionBodyVars = new LinkedHashSet<>();
                             for (Map.Entry<String, Model> modelEntry : swagger.getDefinitions().entrySet()) {
                                 if (refArray[refArray.length - 1].equalsIgnoreCase(modelEntry.getKey())) {
                                     for (Map.Entry<String, Property> propertyEntry : modelEntry.getValue().getProperties().entrySet()) {
