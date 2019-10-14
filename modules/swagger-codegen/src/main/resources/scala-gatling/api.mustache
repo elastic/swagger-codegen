@@ -5,8 +5,7 @@ import {{modelPackage}}._
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-object {{classname}}Operations {
-{{#operations}}{{#operation}}
+object {{classname}}Operations { {{#operations}}{{#operation}}
     {{#description}}/* {{{description}}} */{{/description}}
     def {{operationId}} = http("{{operationId}}")
         .httpRequest("{{httpMethod}}","{{{vendorExtensions.x-gatling-path}}}")
@@ -25,7 +24,5 @@ object {{classname}}Operations {
     {{/vendorExtensions.x-gatling-form-params}}
     {{#vendorExtensions.x-gatling-body-object}}
         .body(StringBody(
-            {{{vendorExtensions.x-gatling-body-object}}}{{#vendorExtensions.x-gatling-body-feeder-params}}({{{vendorExtensions.x-gatling-body-feeder-params}}}){{/vendorExtensions.x-gatling-body-feeder-params}}))
-    {{/vendorExtensions.x-gatling-body-object}}
-    {{/operation}}{{/operations}}
+            {{{vendorExtensions.x-gatling-body-object}}}{{#vendorExtensions.x-gatling-body-feeder-params}}({{{vendorExtensions.x-gatling-body-feeder-params}}}){{/vendorExtensions.x-gatling-body-feeder-params}})){{/vendorExtensions.x-gatling-body-object}}{{/operation}}{{/operations}}
 }

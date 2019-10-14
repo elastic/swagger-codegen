@@ -1,15 +1,14 @@
 package {{package}}
 
-{{#imports}}import {{import}}
-{{/imports}}
-
+{{#imports}}import {{import}}{{/imports}}
 {{#models}}{{#model}}
 case class {{classname}} (
     {{#vars}}
-     {{#description}}/* {{{description}}} */{{/description}}
-      _{{{name}}}: {{^required}}Option[{{/required}}{{datatype}}{{^required}}] = None{{/required}}{{#hasMore}},{{/hasMore}}
+    {{#description}}/* {{{description}}} */{{/description}}
+    _{{{name}}}: {{^required}}Option[{{/required}}{{datatype}}{{^required}}] = None{{/required}}{{#hasMore}},{{/hasMore}}
     {{/vars}}
 )
+
 object {{classname}} {
     def toStringBody({{#vars}}var_{{name}}: {{^required}}{{/required}}Object{{^required}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/vars}}) =
         s"""
