@@ -140,10 +140,10 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
   def invokeApi(host: String, path: String, method: String, queryParams: Map[String, String], formParams: Map[String, String], body: AnyRef, headerParams: Map[String, String], contentType: String): String = {
     val client = getClient(host)
 
-    val normaliedQueryParams = queryParams.filter(k => k._2 != null).map(k => (escape(k._1) + "=" + escape(k._2))).mkString("?", "&", "")
+    val normalisedQueryParams = queryParams.filter(k => k._2 != null).map(k => (escape(k._1) + "=" + escape(k._2))).mkString("?", "&", "")
 
-    val normalisedQuery = if(normaliedQueryParams.nonEmpty) {
-        normaliedQueryParams.mkString("?", "&", "")
+    val normalisedQuery = if(normalisedQueryParams.nonEmpty) {
+      normalisedQueryParams.mkString("?", "&", "")
     } else ""
 
     val builder = client.resource(host + path + normalisedQuery).accept(contentType)
