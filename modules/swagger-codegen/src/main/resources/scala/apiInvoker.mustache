@@ -208,7 +208,7 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
         }
         throw new ApiException(
           response.getStatusInfo().getStatusCode(),
-          entity)
+          s"$entity - ${response.toString} with headers: ${response.getHeaders}")
       }
     }
   }
