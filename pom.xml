@@ -910,8 +910,8 @@
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
-            <name> cloud-snapshot-local</name>
-            <url> https://artifactory.elastic.dev/artifactory/cloud-snapshot-local</url>
+            <name>cloud-snapshot-local</name>
+            <url>https://artifactory.elastic.dev/artifactory/cloud-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
     <repositories>
