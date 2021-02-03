@@ -9,7 +9,7 @@
     <artifactId>swagger-codegen-project</artifactId>
     <packaging>pom</packaging>
     <name>swagger-codegen-project</name>
-    <version>2.2.9-elastic-cloud</version>
+    <version>2.2.10-elastic-cloud</version>
     <url>https://github.com/elastic/swagger-codegen</url>
     <scm>
         <connection>scm:git:git@github.com:elastic/swagger-codegen.git</connection>
@@ -905,13 +905,13 @@
     <distributionManagement>
         <repository>
             <id>central</id>
-            <name>artifactory.elstc.co-cloud-releases</name>
-            <url>https://artifactory.elstc.co/artifactory/cloud-release-local</url>
+            <name>cloud-release-local</name>
+            <url>https://artifactory.elastic.dev/artifactory/cloud-release-local</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
-            <name>artifactory.elstc.co-cloud-snapshots</name>
-            <url>https://artifactory.elstc.co/artifactory/cloud-snapshot-local</url>
+            <name>cloud-snapshot-local</name>
+            <url>https://artifactory.elastic.dev/artifactory/cloud-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
     <repositories>
