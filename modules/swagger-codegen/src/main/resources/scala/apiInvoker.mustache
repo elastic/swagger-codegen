@@ -173,13 +173,13 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
           builder.post(classOf[ClientResponse], form)
         }
         else {
-          if(body == null) builder.post(classOf[ClientResponse], serialize(body))
+          if(body == null) builder.`type`(contentType).post(classOf[ClientResponse], serialize(body))
           else builder.`type`(contentType).post(classOf[ClientResponse], serialize(body))
         }
       }
       case "PUT" => {
-        if(formData != null) builder.post(classOf[ClientResponse], formData)
-        else if(body == null) builder.put(classOf[ClientResponse], null)
+        if(formData != null) builder.`type`(contentType).post(classOf[ClientResponse], formData)
+        else if(body == null) builder.`type`(contentType).put(classOf[ClientResponse], null)
         else builder.`type`(contentType).put(classOf[ClientResponse], serialize(body))
       }
       case "DELETE" => {
@@ -187,8 +187,8 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
         else builder.`type`(contentType).delete(classOf[ClientResponse], serialize(body))
       }
       case "PATCH" => {
-        if(formData != null) builder.header("X-HTTP-Method-Override", "PATCH").post(classOf[ClientResponse], formData)
-        else if(body == null) builder.header("X-HTTP-Method-Override", "PATCH").post(classOf[ClientResponse], null)
+        if(formData != null) builder.header("X-HTTP-Method-Override", "PATCH").`type`(contentType).post(classOf[ClientResponse], formData)
+        else if(body == null) builder.header("X-HTTP-Method-Override", "PATCH").`type`(contentType).post(classOf[ClientResponse], null)
         else builder.header("X-HTTP-Method-Override", "PATCH").`type`(contentType).post(classOf[ClientResponse], serialize(body))
       }
       case _ => null
